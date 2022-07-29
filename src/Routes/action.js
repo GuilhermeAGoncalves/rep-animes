@@ -1,22 +1,16 @@
 import { Router } from "express";
-import {
-  buscarAnimes,
-  postNovoAnime,
-  deleteAnime,
-  putAnime,
-  getUmAnime,
-} from "../controlers/anime.js";
+import * as animeControler from "../controlers/animeControler.js";
 
 const animeActions = new Router();
 
-animeActions.get("/", buscarAnimes);
+animeActions.get("/", animeControler.buscarAnimes);
 
-animeActions.get("/:id", getUmAnime);
+animeActions.get("/:id", animeControler.getUmAnime);
 
-animeActions.post("/", postNovoAnime);
+animeActions.post("/", animeControler.postNovoAnime);
 
-animeActions.put("/:id", putAnime);
+animeActions.put("/:id", animeControler.putAnime);
 
-animeActions.delete("/:id", deleteAnime);
+animeActions.delete("/:id", animeControler.deleteAnime);
 
 export default animeActions;

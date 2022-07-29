@@ -1,8 +1,4 @@
-import mongoose from "mongoose";
-
-const AnimeModel = mongoose.model("Animes", {
-  name: String,
-});
+import AnimeModel from "../models/animesModels.js";
 
 export const buscarTodosAnimes = async () => {
   return await AnimeModel.find();

@@ -1,19 +1,10 @@
 class UserDTO {
   constructor(user) {
-    this.id = user.id;
-    this.name = user.name;
-    this.password = user.password;
-    this.email = user.email;
-    this.isAdm = user.isAdm;
-  }
+    const { userName, email } = user;
 
-  toJson() {
-    return {
-      id: this.id,
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      isAdm: this.isAdm,
-    };
+    this.userName = userName;
+    this.email = email;
   }
 }
+
+export default UserDTO;

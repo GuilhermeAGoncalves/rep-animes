@@ -1,20 +1,14 @@
-import {
-  buscarTodosAnimes,
-  buscarUmAnime,
-  salvarNovoAnime,
-  atualizarAnime,
-  removerAnime,
-} from "../models/animes.js";
+import * as animeService from "../service/animeService.js";
 import AnimeDTO from "../views/animeDTO.js";
 
 //Read
 export const buscarAnimes = async (req, res) => {
-  res.status(200).json(await buscarTodosAnimes());
+  res.status(200).json(await animeService.buscarTodosAnimes());
 };
 
 //Read one
 export const getUmAnime = (req, res) => {
-  const anime = buscarUmAnime(req.params.id);
+  const anime = animeService.buscarUmAnime(req.params.id);
   const dto = new AnimeDTO(anime);
 
   res.status(200).json(dto.toJson());
@@ -24,7 +18,7 @@ export const getUmAnime = (req, res) => {
 export const postNovoAnime = async (req, res) => {
   let { name } = req.body;
 
-  res.status(201).json(await salvarNovoAnime(name));
+  res.status(201).json(await animeService.salvarNovoAnime(name));
 };
 
 //PUT
@@ -32,14 +26,14 @@ export const putAnime = async (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
 
-  res.status(201).json(await atualizarAnime(id, name));
+  res.status(201).json(await animeService.atualizarAnime(id, name));
 };
 
 //Delete
 export const deleteAnime = async (req, res) => {
   const id = req.params.id;
 
-  await removerAnime(id);
+  await animeService.removerAnime(id);
 
   res.status(200).json("Anime Removido");
 };

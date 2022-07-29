@@ -8,7 +8,7 @@ const connect = async (tentativa = 1) => {
     await mongoose.connect(MONGO_URL);
     console.log("Database conectado");
   } catch (error) {
-    console.error(`Não consegui me conectar ao banco ${error}`);
+    console.error(`Não consegui me conectar ao banco \n${error}`);
     setTimeout(() => connect(tentativa + 1), 3000 * tentativa);
   }
 };
