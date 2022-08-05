@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 import * as userService from "../service/userService.js";
 import * as userToken from "../service/tokenService.js";
 
@@ -8,10 +10,14 @@ export const getUsuarios = async (req, res) => {
   res.status(200).json(await userService.buscarUsers());
 };
 
+const SALT = 10;
+
 export const registerNewUser = async (req, res) => {
   let { userName, password, email, isAdm } = req.body;
 
-  let user = await userService.addNewUser(userName, password, email, isAdm);
+  const hash = bcrypt.hashSync(password, SALT);
+
+  let user = await userService.addNewUser(userName, hash, email, isAdm);
 
   res.status(201).json(new UserDTO(user));
 };
@@ -25,7 +31,7 @@ export const loginUser = async (req, res) => {
     res.status(403).json("Unathorized");
   }
 
-  if (user.password !== password) {
+  if (!bcrypt.compareSync(password, user.password)) {
     res.status(403).json("Unathorized");
   }
 

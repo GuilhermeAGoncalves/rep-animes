@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as animeControler from "../controlers/animeControler.js";
+import * as animeControler from "../controllers/animeControler.js";
 
 const animeActions = new Router();
 
